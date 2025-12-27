@@ -1,0 +1,184 @@
+🔩 Les 3 couches invisibles de ton dashboard
+1️⃣ Les DONNÉES (ce qui existe)
+
+Ce sont tes cryptos.
+
+Exemple mental :
+
+Bitcoin – BTC – 0.5 – acheté à 30 000
+
+Ethereum – ETH – 2 – acheté à 1 800
+
+👉 Ces données vivent :
+
+soit dans LocalStorage
+
+soit plus tard dans une base de données
+
+Sans données → dashboard mort.
+
+2️⃣ La LOGIQUE (le cerveau)
+
+C’est JavaScript.
+
+JavaScript sert à :
+
+lire les données
+
+faire des calculs
+
+décider quoi afficher
+
+Exemples concrets :
+
+calculer Total investi
+
+compter Nombre d’actifs
+
+préparer les chiffres pour les graphiques
+
+mettre l’heure de Dernière MAJ
+
+👉 Sans JS :
+
+tes cartes restent vides
+
+tes graphiques ne savent rien
+
+ta table est figée
+
+3️⃣ L’AFFICHAGE (ce que tu vois)
+
+C’est ton HTML / CSS.
+
+les cartes KPI
+
+la table
+
+les cadres de graphiques
+
+👉 Ils n’inventent rien
+👉 Ils attendent que JS leur donne des valeurs
+
+📦 Décryptage de TON dashboard (bloc par bloc)
+🔹 Carte “Total investi”
+
+👉 Question posée :
+
+« Combien d’argent ai-je réellement mis ? »
+
+JavaScript doit :
+
+parcourir tous les actifs
+
+faire : prix d’achat × quantité
+
+additionner
+
+👉 La carte affiche juste le résultat
+
+🔹 Carte “Nombre d’actifs”
+
+👉 Question posée :
+
+« Combien de cryptos différentes je possède ? »
+
+JavaScript :
+
+regarde la liste
+
+compte BTC, ETH, SOL…
+
+🔹 Carte “Catégories”
+
+👉 Question posée :
+
+« Mon portefeuille est orienté vers quoi ? »
+
+JavaScript :
+
+lit les catégories
+
+résume (DeFi, L1, Meme…)
+
+🔹 Carte “Dernière MAJ”
+
+👉 Question posée :
+
+« Ces chiffres sont-ils récents ? »
+
+JavaScript :
+
+prend l’heure système
+
+l’affiche au moment du refresh
+
+📊 Répartition du portefeuille (donut)
+
+👉 Question posée :
+
+« Où est mon argent ? »
+
+JavaScript :
+
+calcule la valeur de chaque crypto
+
+transforme ça en pourcentages
+
+envoie les chiffres au graphique
+
+Le graphique ne calcule rien.
+Il dessine seulement.
+
+📋 Table “Infos crypto”
+
+👉 Question posée :
+
+« Détail précis de chaque actif »
+
+JavaScript :
+
+lit les données
+
+remplit chaque ligne
+
+met “—” si info manquante
+
+HTML = tableau vide
+JS = remplisseur automatique
+
+📈 Performance (courbe)
+
+👉 Question posée :
+
+« Est-ce que ça monte ou ça descend ? »
+
+JavaScript :
+
+récupère des valeurs dans le temps
+
+les passe au graphique
+
+affiche une tendance
+
+🧩 Donc… c’est quoi JavaScript ici ?
+
+👉 JavaScript = chef d’orchestre
+
+Il :
+
+récupère les données
+
+calcule
+
+met à jour l’interface
+
+réagit aux actions (bouton “Actualiser”)
+
+Sans JavaScript :
+
+ton dashboard est une image statique
+
+Avec JavaScript :
+
+ton dashboard devient un outil vivant

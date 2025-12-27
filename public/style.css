@@ -1,0 +1,307 @@
+:root{
+  --bg0:#070A12;
+  --bg1:#0B1020;
+  --txt:#EAF0FF;
+  --muted:#9FB0D0;
+  --line:rgba(255,255,255,.08);
+  --brand1:#7C3AED;
+  --brand2:#22D3EE;
+  --brand3:#34D399;
+  --shadow: 0 20px 60px rgba(0,0,0,.55);
+  --radius: 18px;
+}
+
+    html,body{height:100%;}
+    body{
+      background: var(--bg1);   /* tu peux mettre --bg0 si tu veux plus sombre */
+  color: var(--txt);
+  overflow-x:hidden;
+        
+    }
+
+    /* Topbar */
+    .topbar{
+      position: sticky;
+      top:0;
+      z-index: 1020;
+      backdrop-filter: blur(10px);
+      background: rgba(10,14,28,.55);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:.6rem;
+      padding:.55rem .8rem;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+    }
+    .brand-dot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(135deg,var(--brand1),var(--brand2));
+      box-shadow: 0 0 0 6px rgba(124,58,237,.14);
+    }
+
+    /* Sidebar */
+    .sidebar{
+      height: 100vh;
+      position: sticky;
+      top:0;
+      border-right:1px solid var(--line);
+      background: rgba(10,14,28,.55);
+      backdrop-filter: blur(10px);
+    }
+    .nav-pill{
+      border-radius: 14px;
+      padding:.75rem .9rem;
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+      color: var(--muted);
+      text-decoration:none;
+      border:1px solid transparent;
+      transition: .15s ease;
+    }
+    .nav-pill:hover{
+      color: var(--txt);
+      background: rgba(255,255,255,.04);
+      border-color: var(--line);
+    }
+    /* Tu peux gérer la classe "active" en JS plus tard */
+    .nav-pill.active{
+      color: var(--txt);
+      background: linear-gradient(135deg, rgba(124,58,237,.20), rgba(34,211,238,.12));
+      border-color: rgba(124,58,237,.35);
+      box-shadow: 0 12px 40px rgba(124,58,237,.18);
+    }
+
+    /* Cards */
+    .glass-card{
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .card-soft{
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .section-title{ letter-spacing:.2px; font-weight:700; }
+    .small-muted{ color: var(--muted); }
+
+    /* Table */
+    .table-darkish{
+      --bs-table-bg: transparent;
+      --bs-table-color: var(--txt);
+      --bs-table-border-color: var(--line);
+      --bs-table-striped-bg: rgba(255,255,255,.03);
+      --bs-table-hover-bg: rgba(255,255,255,.04);
+      color: var(--txt);
+    }
+ /* .seeCrypto{
+
+    color: #EAF0FF !important;
+ } */
+    /* Inputs */
+    .form-control, .form-select{
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      color: var(--txt);
+      border-radius: 14px;
+    }
+    .form-control:focus, .form-select:focus{
+      border-color: rgba(34,211,238,.45);
+      box-shadow: 0 0 0 .25rem rgba(34,211,238,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--txt);
+    }
+    option{
+      color: #ffffff;
+      background-color: #070A12;
+    }
+
+    .form-label{ color: var(--muted); }
+
+    /* Chips */
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      padding:.35rem .6rem;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size:.85rem;
+      white-space: nowrap;
+    }
+
+    /* Chart placeholders */
+    .chart-frame{
+      height: 320px;
+      border-radius: var(--radius);
+      border: 1px dashed rgba(255,255,255,.20);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      position: relative;
+      overflow:hidden;
+    }
+    .chart-frame::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(600px 220px at 20% 20%, rgba(124,58,237,.22), transparent 60%),
+        radial-gradient(600px 220px at 80% 30%, rgba(34,211,238,.18), transparent 60%),
+        radial-gradient(600px 220px at 55% 90%, rgba(52,211,153,.12), transparent 60%);
+      opacity:.75;
+      pointer-events:none;
+    }
+    .chart-center{
+      position:absolute; inset:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:.35rem;
+      text-align:center;
+      padding:1rem;
+    }
+    /* =========================
+   CryptoFolio Modal Theme
+   ========================= */
+
+/* Backdrop (fond derrière la modal) */
+/* Backdrop très sombre (cache vraiment la page derrière) */
+.modal-backdrop.show{
+  opacity: 1; 
+  background:
+    radial-gradient(900px 420px at 25% 20%, rgba(124,58,237,.10), transparent 60%),
+    radial-gradient(900px 420px at 75% 30%, rgba(34,211,238,.08), transparent 60%),
+    rgba(0,0,0,.92); /* augmente à .95 si tu veux encore plus noir */
+}
+
+
+/* Container */
+.modal-content{
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: var(--txt);
+  overflow: hidden;
+}
+
+/* Header / Footer */
+.modal-header,
+.modal-footer{
+  border-color: var(--line) !important;
+  background: rgba(10,14,28,.35);
+  backdrop-filter: blur(10px);
+}
+
+.modal-title{
+  color: var(--txt);
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+/* Close button (X) */
+.modal-header .btn-close{
+  filter: invert(1) grayscale(1);
+  opacity: .75;
+}
+.modal-header .btn-close:hover{ opacity: 1; }
+
+/* Body */
+.modal-body{ color: var(--txt); }
+.modal-body .form-text,
+.modal-body .text-muted,
+.modal-body small{ color: var(--muted) !important; }
+
+/* Inputs inside modal */
+.modal-content .form-control,
+.modal-content .form-select{
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--line);
+  color: var(--txt);
+  border-radius: 14px;
+}
+.modal-content .form-control:focus,
+.modal-content .form-select:focus{
+  border-color: rgba(34,211,238,.45);
+  box-shadow: 0 0 0 .25rem rgba(34,211,238,.12);
+  background: rgba(255,255,255,.04);
+  color: var(--txt);
+}
+
+/* Input group (ex: USD) */
+.modal-content .input-group-text{
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  border-radius: 14px;
+}
+.modal-content .input-group .form-control{
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.modal-content .input-group .input-group-text{
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+/* Placeholder blanc (inputs) */
+.modal-content .form-control::placeholder{
+  color: rgba(255,255,255,.95);
+  opacity: 1; /* important pour Firefox */
+}
+
+/* Placeholder blanc (select n’a pas de placeholder, mais si tu utilises une option "Choisir..." ) */
+.modal-content .form-select{
+  color: var(--txt);
+}
+
+/* Optionnel: pour que l'option "Choisir..." soit plus claire */
+.modal-content .form-select option[value=""]{
+  color: rgba(255,255,255,.85);
+}
+
+/* Buttons */
+.modal-footer .btn{
+  border-radius: 14px;
+  border: 1px solid var(--line);
+}
+.modal-footer .btn-secondary{
+  background: rgba(255,255,255,.04);
+  color: var(--txt);
+}
+.modal-footer .btn-secondary:hover{
+  background: rgba(255,255,255,.07);
+  border-color: rgba(255,255,255,.14);
+}
+.modal-footer .btn-primary{
+  background: linear-gradient(135deg, rgba(124,58,237,.95), rgba(34,211,238,.65));
+  border-color: rgba(124,58,237,.35);
+  color: var(--txt);
+  box-shadow: 0 12px 40px rgba(124,58,237,.18);
+}
+.modal-footer .btn-primary:hover{ filter: brightness(1.05); }
+
+/* Animation */
+.modal.fade .modal-dialog{
+  transform: translateY(10px) scale(.98);
+  transition: transform .18s ease-out;
+}
+.modal.show .modal-dialog{
+  transform: translateY(0) scale(1);
+}
+
+    /* Sections (sans JS, tout est visible. Tu peux cacher/afficher ensuite.) */
+    .page{ margin-bottom: 1.25rem; }
+
+    /* Responsive */
+    @media (max-width: 991.98px){
+      .sidebar{ position: relative; min-height:auto; }
+    }
