@@ -34,11 +34,9 @@
       <aside class="col-lg-2 sidebar p-3">
         <div class="mb-3">
           <div class="d-grid gap-2">
-            <!-- Sans JS: ce sont des liens, tu géreras le routing plus tard -->
             <a class="nav-pill active" href="#dashboard"><i class="bi bi-grid-1x2"></i> Dashboard</a>
-            <a class="nav-pill" href="#crud"><i class="bi bi-database"></i>CRUD (Complet)</a>
-            <a class="nav-pill" href="#crud-simple"><i class="bi bi-ui-checks"></i> CRUD Simple</a>
-            <a class="nav-pill" href="#portefeuilles"><i class="bi bi-wallet2"></i> Portefeuilles</a>
+            <a class="nav-pill" href="#crud"><i class="bi bi-database"></i>MesCryptos</a>
+            <a class="nav-pill" href="#crud-simple"><i class="bi bi-ui-checks"></i> Portefeuille</a>
             <a class="nav-pill" href="#marchee"><i class="bi bi-graph-up-arrow"></i> Marché</a>
           </div>
         </div>
@@ -53,14 +51,9 @@
             <div>
               <h2 class="section-title mb-1">Dashboard</h2>
             </div>
-            <!-- <div class="d-flex gap-2">
-              <button class="btn btn-outline-light" type="button">
-                <i class="bi bi-arrow-repeat"></i> Rafraîchir
-              </button>
-              <button class="btn btn-light" type="button">
-                <i class="bi bi-download"></i> Export
-              </button>
-            </div> -->
+            <button id="refresh-dashboard" class="btn btn-outline-light btn-sm">
+              <i class="bi bi-arrow-clockwise"></i> Actualiser
+            </button>
           </div>
 
           <!-- KPI -->
@@ -69,69 +62,58 @@
               <div class="glass-card p-3 h-100">
                 <div class="d-flex justify-content-between align-items-start">
                   <div>
-                    <!-- <div class="small-muted">Total investi</div> -->
-                    <div class="fs-4 fw-bold">—</div>
+                    <div id="kpi-total-investi" class="fs-4 fw-bold">—</div>
                   </div>
-                  <span class="chip"><i class="bi bi-cash-coin"></i> KPI</span>
+                  <span class="chip"><i class="bi bi-cash-coin"></i> Total investi</span>
                 </div>
-                <!-- <div class="small-muted mt-2" style="font-size:.9rem;">prix d’achat × quantité</div> -->
               </div>
             </div>
+
             <div class="col-12 col-md-6 col-xl-3">
               <div class="glass-card p-3 h-100">
                 <div class="d-flex justify-content-between align-items-start">
                   <div>
-                    <!-- <div class="small-muted">Nombre d’actifs</div> -->
-                    <div class="fs-4 fw-bold">—</div>
+                    <div id="kpi-nb-actifs" class="fs-4 fw-bold">—</div>
                   </div>
-                  <span class="chip"><i class="bi bi-collection"></i> KPI</span>
+                  <span class="chip"><i class="bi bi-collection"></i> Nombre d'actifs</span>
                 </div>
-                <!-- <div class="small-muted mt-2" style="font-size:.9rem;">BTC, ETH, SOL…</div> -->
               </div>
             </div>
+
             <div class="col-12 col-md-6 col-xl-3">
               <div class="glass-card p-3 h-100">
                 <div class="d-flex justify-content-between align-items-start">
                   <div>
-                    <!-- <div class="small-muted">Catégories</div> -->
-                    <div class="fs-4 fw-bold">—</div>
+                    <div id="kpi-current-value" class="fs-4 fw-bold">—</div>
                   </div>
-                  <span class="chip"><i class="bi bi-tags"></i> KPI</span>
+                  <span class="chip"><i class="bi bi-tags"></i> Valeur actuelle</span>
                 </div>
-                <!-- <div class="small-muted mt-2" style="font-size:.9rem;">DeFi, L1, Meme…</div> -->
               </div>
             </div>
+
             <div class="col-12 col-md-6 col-xl-3">
               <div class="glass-card p-3 h-100">
                 <div class="d-flex justify-content-between align-items-start">
                   <div>
-                    <!-- <div class="small-muted">Dernière MAJ</div> -->
-                    <div class="fs-4 fw-bold">—</div>
+                    <div id="kpi-last-update" class="fs-6 fw-bold">—</div>
                   </div>
-                  <span class="chip"><i class="bi bi-clock-history"></i> KPI</span>
+                  <span class="chip"><i class="bi bi-clock-history"></i> Dernière mise à jour</span>
                 </div>
-                <!-- <div class="small-muted mt-2" style="font-size:.9rem;">Horodatage</div> -->
               </div>
             </div>
           </div>
 
+          <!-- Charts -->
           <div class="row g-3">
             <div class="col-12 col-xl-7">
               <div class="glass-card p-3">
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
-                  <div>
-                    <!-- <div class="fw-semibold">Répartition du portefeuille</div> -->
-                    <div class="small-muted">Chart</div>
-                  </div>
+                  <div class="small-muted">Répartition du portefeuille</div>
                   <span class="chip"><i class="bi bi-pie-chart"></i> Chart</span>
                 </div>
 
                 <div class="chart-frame">
-                  <div class="chart-center">
-                    <i class="bi bi-pie-chart fs-1"></i>
-                    <div class="fw-semibold">Cadre de chart</div>
-                    <!-- <div class="small-muted">Tu mettras ta lib de charts ici</div> -->
-                  </div>
+                  <canvas id="chart-portefeuille"></canvas>
                 </div>
               </div>
             </div>
@@ -139,10 +121,7 @@
             <div class="col-12 col-xl-5">
               <div class="glass-card p-3 h-100">
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
-                  <div>
-                    <div class="fw-semibold">Infos crypto</div>
-                    <!-- <div class="small-muted">Table placeholder.</div> -->
-                  </div>
+                  <div class="fw-semibold">Infos crypto</div>
                   <span class="chip"><i class="bi bi-table"></i> Table</span>
                 </div>
 
@@ -153,43 +132,14 @@
                         <th>Nom</th>
                         <th>Symbole</th>
                         <th>Quantité</th>
-                        <th>Prix d’achat</th>
+                        <th>Prix marché</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td></td>
-                        <td><span class="badge text-bg-dark border" style="border-color:var(--line)!important;"></span></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td><span class="badge text-bg-dark border" style="border-color:var(--line)!important;"></span></td>
-                        <td></td>
-                        <td></td>
-                      </tr>
+                    <tbody id="crypto-table-body">
+                      <!-- rempli par JS -->
                     </tbody>
                   </table>
                 </div>
-
-                <hr style="border-color: var(--line);" class="my-3"/>
-
-                <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
-                  <div>
-                    <div class="small-muted">Courbe</div>
-                  </div>
-                  <span class="chip"><i class="bi bi-graph-up"></i> Chart</span>
-                </div>
-
-                <div class="chart-frame" style="height:220px;">
-                  <div class="chart-center">
-                    <i class="bi bi-graph-up fs-1"></i>
-                    <div class="fw-semibold">chart</div>
-                    <div class="small-muted">Courbe / évolution</div>
-                  </div>
-                </div>
-
               </div>
             </div>
           </div>
@@ -199,10 +149,9 @@
         <section class="page" id="crud">
           <div class="d-flex flex-wrap align-items-end justify-content-between gap-2 mb-3">
             <div>
-              <h2 class="section-title mb-1">CRUD (Complet)</h2>
+              <h2 class="section-title mb-1">MesCryptos</h2>
               <div class="small-muted"></div>
             </div>
-            
           </div>
 
           <div class="row g-3">
@@ -218,7 +167,16 @@
 
                   <div class="mb-2">
                     <label class="form-label">Symbole</label>
-                    <input id="symbole-input" class="form-control" placeholder="Ex: BTC" name="symbole" />
+                    <!-- <input id="symbole-input" class="form-control" placeholder="Ex: BTC" name="symbole" /> -->
+                     <select name="symbole" id="symbole-input">
+                      <option value="BTC">BTC</option>
+                      <option value="BTC">ETH</option>
+                      <option value="BTC">SOL</option>
+                      <option value="BTC">BNB</option>
+                      <option value="BTC">ADA</option>
+                      <option value="BTC">XRP</option>
+                      <option value="BTC">DOGE</option>
+                     </select>
                   </div>
 
                   <div class="mb-2">
@@ -227,14 +185,9 @@
                   </div>
 
                   <div class="mb-2">
-                    <label class="form-label">Prix d’achat</label>
-                    <input id="prix-input" class="form-control" type="number" step="0.01" placeholder="Ex: 42000" name="prix"/>
-                  </div>
-
-                  <div class="mb-2">
                     <label class="form-label">Catégorie</label>
                     <select id="cat-input" class="form-select" name="cat">
-                      <option selected >Choisir…</option>
+                      <option value="" selected>Choisir…</option>
                       <option>Layer 1</option>
                       <option>DeFi</option>
                       <option>Meme</option>
@@ -246,7 +199,7 @@
 
                   <div class="mb-3">
                     <label class="form-label">Date d’ajout</label>
-                    <input id="date-input" class="form-control" type="date" id="date-input"/>
+                    <input id="date-input" class="form-control" type="date"/>
                   </div>
 
                   <div class="d-grid gap-2">
@@ -257,7 +210,6 @@
                       <i class="bi bi-trash3"></i> Reset
                     </button>
                   </div>
-
                 </form>
               </div>
             </div>
@@ -269,12 +221,12 @@
                     <div class="fw-semibold">Liste des actifs</div>
                   </div>
 
-                  <div class="input-group" style="max-width: 320px;">
+                  <!-- <div class="input-group" style="max-width: 320px;">
                     <span class="input-group-text bg-transparent text-white border" style="border-color:var(--line)!important;">
                       <i class="bi bi-search"></i>
                     </span>
                     <input class="form-control" placeholder="Rechercher…" />
-                  </div>
+                  </div> -->
                 </div>
 
                 <div class="table-responsive">
@@ -284,18 +236,17 @@
                         <th>Nom</th>
                         <th>Symbole</th>
                         <th>Quantité</th>
-                        <th>Prix</th>
+                        <th>Prix marché</th>
                         <th>Catégorie</th>
                         <th>Date</th>
                         <th class="text-end">Actions</th>
                       </tr>
                     </thead>
                     <tbody id="actifs-tbody">
-
+                      <!-- rempli par JS -->
                     </tbody>
                   </table>
                 </div>
-
               </div>
             </div>
           </div>
@@ -305,10 +256,10 @@
         <section class="page" id="crud-simple">
           <div class="d-flex flex-wrap align-items-end justify-content-between gap-2 mb-3">
             <div>
-              <h2 class="section-title mb-1">CRUD Simple</h2>
+              <h2 class="section-title mb-1">Portefeuille</h2>
               <div class="small-muted"></div>
             </div>
-            <span class="chip"><i class="bi bi-ui-checks"></i>Simple</span>
+            <span class="chip"><i class="bi bi-ui-checks"></i> Simple</span>
           </div>
 
           <div class="row g-3">
@@ -320,21 +271,25 @@
                   <div class="row g-2">
                     <div class="col-12 col-md-6">
                       <label class="form-label">Nom</label>
-                      <input class="form-control" placeholder="Bitcoin" />
+                      <input id="nom" class="form-control" placeholder="Bitcoin" />
                     </div>
                     <div class="col-12 col-md-6">
                       <label class="form-label">Symbole</label>
-                      <input class="form-control" placeholder="BTC" />
+                      <input id="symbole" class="form-control" placeholder="BTC" />
                     </div>
                     <div class="col-12">
                       <label class="form-label">Quantité</label>
-                      <input class="form-control" type="number" step="0.0001" placeholder="0.15" />
+                      <input id="quantite" class="form-control" type="number" step="0.0001" placeholder="0.15" />
                     </div>
                   </div>
 
                   <div class="d-flex gap-2 mt-3">
-                    <button class="btn btn-light w-100" type="button"><i class="bi bi-plus-circle"></i>Ajouter</button>
-                    <button class="btn btn-outline-danger" type="button"><i class="bi bi-trash3"></i></button>
+                    <button id="ajouter" class="btn btn-light w-100" type="button">
+                      <i class="bi bi-plus-circle"></i> Ajouter
+                    </button>
+                    <button class="btn btn-outline-danger" type="reset">
+                      <i class="bi bi-trash3"></i>
+                    </button>
                   </div>
 
                   <div class="small-muted mt-3" style="font-size:.9rem;"></div>
@@ -342,7 +297,7 @@
               </div>
             </div>
 
-            <div class="col-12 col-lg-7">
+            <!-- <div class="col-12 col-lg-7">
               <div class="glass-card p-3">
                 <div class="fw-semibold mb-2">Liste simple</div>
 
@@ -356,63 +311,13 @@
                         <th class="text-end">Action</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td></td>
-                        <td><span class="badge text-bg-dark border" style="border-color:var(--line)!important;"></span></td>
-                        <td></td>
-                        <td class="text-end">
-                          <button class="btn btn-sm btn-outline-danger" type="button"><i class="bi bi-trash"></i></button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="4" class="small-muted"></td>
-                      </tr>
+                    <tbody id="actifs-simple-tbody">
+                     
                     </tbody>
                   </table>
                 </div>
-
               </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- PORTEFEUILLES (VIDE) -->
-        <section class="page" id="portefeuilles">
-          <div class="d-flex flex-wrap align-items-end justify-content-between gap-2 mb-3">
-            <div>
-              <h2 class="section-title mb-1">Portefeuilles</h2>
-              <div class="small-muted"></div>
-            </div>
-            <span class="chip"><i class="bi bi-wallet2"></i> </span>
-          </div>
-
-          <div class="glass-card p-4">
-            <div class="d-flex align-items-start gap-3">
-              <div class="display-6"><i class="bi bi-inboxes"></i></div>
-              <div>
-                <div class="fw-semibold mb-1"> </div>
-                <div class="small-muted">
-                  <!-- Ici tu affiches les données de localStorage plus tard (tu as demandé de laisser vide). -->
-                </div>
-
-                <div class="row g-3 mt-3">
-                  <div class="col-12 col-md-6">
-                    <div class="card-soft p-3">
-                      <div class="fw-semibold">Portefeuille A</div>
-                      <div class="small-muted">Liste + stats (à coder)</div>
-                    </div>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <div class="card-soft p-3">
-                      <div class="fw-semibold">Portefeuille B</div>
-                      <div class="small-muted">Liste + stats (à coder)</div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
+            </div> -->
           </div>
         </section>
 
@@ -430,164 +335,151 @@
           </div>
 
           <div class="row g-3">
-            <div class="col-12 col-xl-6">
-              <div class="glass-card p-3">
+            <!-- BTC -->
+            <div class="col-12 col-md-6">
+              <div class="glass-card p-3" data-ticker="BTC">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                   <div>
                     <div class="fw-semibold">BTC / USD</div>
-                    <div class="small-muted">Cadre chart</div>
+                    <div class="small-muted">Bitcoin</div>
                   </div>
                   <div class="d-flex gap-2">
-                    <span class="chip">1H</span><span class="chip">4H</span><span class="chip">1D</span>
+                    <span class="chip" data-tf="1H">1H</span>
+                    <span class="chip" data-tf="4H">4H</span>
+                    <span class="chip" data-tf="1D">1D</span>
                   </div>
                 </div>
                 <div class="chart-frame">
-                  <div class="chart-center">
-                    <i class="bi bi-currency-bitcoin fs-1"></i>
-                    <div class="fw-semibold">Chart BTC</div>
-                    <div class="small-muted">TradingView </div>
-                  </div>
+                  <canvas id="mkt-btc" class="market-canvas"></canvas>
                 </div>
               </div>
             </div>
 
-            <div class="col-12 col-xl-6">
-              <div class="glass-card p-3">
+            <!-- ETH -->
+            <div class="col-12 col-md-6">
+              <div class="glass-card p-3" data-ticker="ETH">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                   <div>
                     <div class="fw-semibold">ETH / USD</div>
-                    <div class="small-muted">chart</div>
+                    <div class="small-muted">Ethereum</div>
                   </div>
                   <div class="d-flex gap-2">
-                    <span class="chip">1H</span><span class="chip">4H</span><span class="chip">1D</span>
+                    <span class="chip" data-tf="1H">1H</span>
+                    <span class="chip" data-tf="4H">4H</span>
+                    <span class="chip" data-tf="1D">1D</span>
                   </div>
                 </div>
                 <div class="chart-frame">
-                  <div class="chart-center">
-                    <i class="bi bi-droplet fs-1"></i>
-                    <div class="fw-semibold">Chart  ETH</div>
-                    <div class="small-muted"> TradingView </div>
-                  </div>
+                  <canvas id="mkt-eth" class="market-canvas"></canvas>
                 </div>
               </div>
             </div>
 
-            <div class="col-12 col-xl-6">
-              <div class="glass-card p-3">
+            <!-- SOL -->
+            <div class="col-12 col-md-6">
+              <div class="glass-card p-3" data-ticker="SOL">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                   <div>
                     <div class="fw-semibold">SOL / USD</div>
-                    <div class="small-muted">Cadre chart</div>
+                    <div class="small-muted">Solana</div>
                   </div>
                   <div class="d-flex gap-2">
-                    <span class="chip">1H</span><span class="chip">4H</span><span class="chip">1D</span>
+                    <span class="chip" data-tf="1H">1H</span>
+                    <span class="chip" data-tf="4H">4H</span>
+                    <span class="chip" data-tf="1D">1D</span>
                   </div>
                 </div>
                 <div class="chart-frame">
-                  <div class="chart-center">
-                    <i class="bi bi-sun fs-1"></i>
-                    <div class="fw-semibold">Chart  SOL</div>
-                    <div class="small-muted"> TradingView</div>
-                  </div>
+                  <canvas id="mkt-sol" class="market-canvas"></canvas>
                 </div>
               </div>
             </div>
 
-            <div class="col-12 col-xl-6">
-              <div class="glass-card p-3">
+            <!-- BNB -->
+            <div class="col-12 col-md-6">
+              <div class="glass-card p-3" data-ticker="BNB">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                   <div>
                     <div class="fw-semibold">BNB / USD</div>
-                    <div class="small-muted">Cadre chart</div>
+                    <div class="small-muted">BNB</div>
                   </div>
                   <div class="d-flex gap-2">
-                    <span class="chip">1H</span><span class="chip">4H</span><span class="chip">1D</span>
+                    <span class="chip" data-tf="1H">1H</span>
+                    <span class="chip" data-tf="4H">4H</span>
+                    <span class="chip" data-tf="1D">1D</span>
                   </div>
                 </div>
                 <div class="chart-frame">
-                  <div class="chart-center">
-                    <i class="bi bi-hexagon fs-1"></i>
-                    <div class="fw-semibold">Chart BNB</div>
-                    <div class="small-muted">TradingView</div>
-                  </div>
+                  <canvas id="mkt-bnb" class="market-canvas"></canvas>
                 </div>
               </div>
             </div>
-
-          </div>  
+          </div>
         </section>
-        
 
       </main>
     </div>
   </div>
-  <!-- Button trigger modal -->
 
-
-<!-- Modal BOOTSRAP -->
+  <!-- 🔹 MODAL Bootstrap pour modifier un actif (pris de ton index 1) -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier l'actifs</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modifier l'actif</h1>
           <button type="button" id="button-close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form class="modal-form" id="form-modif">
-        <div class="row g-3">
-          <div class="col-12">
-            <label class="form-label" for="m-nom">Nom</label>
-            <input id="m-nom" class="form-control mform" type="text" placeholder="Ex: Bitcoin" required/>
-          </div>
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label" for="m-nom">Nom</label>
+                <input id="m-nom" class="form-control mform" type="text" placeholder="Ex: Bitcoin" required/>
+              </div>
 
-          <div class="col-12 col-md-6">
-            <label class="form-label" for="m-symbole">Symbole</label>
-            <input id="m-symbole" class="form-control mform " type="text" placeholder="Ex: BTC" required pattern="[A-Za-z0-9]{2,10}"/>
-          </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label" for="m-symbole">Symbole</label>
+                <input id="m-symbole" class="form-control mform" type="text" placeholder="Ex: BTC" required pattern="[A-Za-z0-9]{2,10}"/>
+              </div>
 
-          <div class="col-12 col-md-6">
-            <label class="form-label" for="m-quantite">Quantité</label>
-            <input id="m-quantite" class="form-control mform" type="number" step="0.01" min="0.01" placeholder="Ex: 0.25" required/>
-          </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label" for="m-quantite">Quantité</label>
+                <input id="m-quantite" class="form-control mform" type="number" step="0.01" min="0.01" placeholder="Ex: 0.25" required/>
+              </div>
 
-          <div class="col-12 col-md-6">
-            <label class="form-label" for="m-prix">Prix d’achat</label>
-            <div class="input-group">
-              <input id="m-prix" class="form-control mform" type="number" step="0.01" min="0.01" placeholder="Ex: 30000" required/>
-              <span class="input-group-text">USD</span>
+              <div class="col-12 col-md-6">
+                <label class="form-label" for="m-cat">Catégorie</label>
+                <select id="m-cat" class="form-select" required>
+                  <option value="" selected>Choisir...</option>
+                  <option value="Layer 1">Layer 1</option>
+                  <option value="DeFi">DeFi</option>
+                  <option value="Meme">Meme</option>
+                  <option value="Gaming">Gaming</option>
+                  <option value="Stablecoin">Stablecoin</option>
+                  <option value="Autre">Autre</option>
+                </select>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label" for="m-date">Date</label>
+                <input id="m-date" class="form-control mform" type="date" required/>
+              </div>
             </div>
-            <div class="form-text">Prix d’achat unitaire (par 1 coin).</div>
-          </div>
 
-          <div class="col-12 col-md-6">
-            <label class="form-label" for="m-portefeuille">Catégorie</label>
-            <select id="m-cat" class="form-select"  required>
-              <option value="" selected>Choisir...</option>
-              <option value="Binance">Binance</option>
-              <option value="Coinbase">Coinbase</option>
-              <option value="Metamask">Metamask</option>
-              <option value="Ledger">Ledger</option>
-            </select>
-          </div>
-          <div class="col-12 col-md-6">
-            <label class="form-label" for="m-quantite">Date</label>
-            <input id="m-date" class="form-control mform" type="date" required/>
-          </div>
-          <div class="col-12">
-          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+              <button type="submit" class="btn btn-primary" id="save">Enregistrer les modifications</button>
+            </div>
+          </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-          <button type="submit" class="btn btn-primary" id="save">Enregistrer les modifications</button>
-        </div>
-      </form>
 
-        </div>
-        
       </div>
     </div>
   </div>
+
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="script.js"></script>
 </body>
 </html>
